@@ -24,44 +24,40 @@
             box-shadow: 0 15px 50px rgba(0,0,0,0.8);
         }
 
+        .line { color: var(--gold); font-family: monospace; font-size: 0.8rem; text-align: left; margin: 10px 0; padding-left: 10px; border-left: 2px solid var(--gold); min-height: 1.2em; }
+
         .header-section { margin-bottom: 15px; }
         .header-main { display: flex; align-items: center; justify-content: center; white-space: nowrap; gap: 8px; }
         h1 { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(1.2rem, 5vw, 1.6rem); color: var(--gold); margin: 0; }
         
+        .heart-glow { filter: drop-shadow(0 0 8px rgba(255, 77, 77, 0.6)); display: inline-block; margin-left: 5px; }
         .dino-bounce { display: inline-block; animation: boing 0.8s infinite alternate ease-in-out; filter: drop-shadow(0 0 5px var(--gold)); }
         @keyframes boing { from { transform: translateY(0); } to { transform: translateY(-10px); } }
 
-        /* BIGGER SUBHEADER */
-        .subheader { font-family: 'Montserrat', sans-serif; font-size: 1.05rem; color: var(--champagne); opacity: 1; margin-top: 10px; font-weight: 400; }
+        .subheader { font-family: 'Montserrat', sans-serif; font-size: 1.1rem; color: var(--champagne); margin-top: 10px; font-weight: 400; }
 
-        /* CAKE AURA */
         .cake-container { height: 90px; width: 120px; margin: 35px auto; position: relative; }
-        .cake-container::before {
-            content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: 160px; height: 160px; 
-            background: radial-gradient(circle, rgba(255, 204, 51, 0.15) 0%, transparent 70%);
-            z-index: -1;
-        }
-
         .layer { position: absolute; left: 10px; width: 100px; height: 20px; border-radius: 4px; opacity: 0; transform: translateY(15px); transition: 0.8s ease; }
         .bottom { background: #1a2a3a; bottom: 0; } .mid { background: #243b55; bottom: 20px; } .top { background: #2c5364; bottom: 40px; }
         .icing { background: var(--gold); height: 6px; width: 100px; bottom: 60px; border-radius: 10px; position: absolute; left: 10px; opacity: 0; transition: 0.8s; }
         .visible { opacity: 1 !important; transform: translateY(0) !important; }
 
-        /* CENTERED CANDLES & SOFT FLAMES */
+        /* FIXED FLAME POSITIONING */
         .candles-group { position: absolute; bottom: 65px; left: 50%; transform: translateX(-50%); width: 80px; display: flex; justify-content: space-around; opacity: 0; transition: 1s; }
-        .candle { width: 5px; height: 18px; background: #fff; border-radius: 2px; position: relative; }
-        .flame { 
-            position: absolute; top: -10px; left: 50%; transform: translateX(-50%); 
-            width: 8px; height: 11px; background: orange; border-radius: 50%; 
-            box-shadow: 0 0 8px orange; animation: flicker 0.1s infinite; 
+        .candle { 
+            width: 5px; height: 18px; background: #fff; border-radius: 2px; 
+            display: flex; justify-content: center; position: relative; 
         }
-        @keyframes flicker { 0%, 100% { transform: translateX(-50%) scale(1); } 50% { transform: translateX(-50%) scale(1.1); } }
+        .flame { 
+            position: absolute; top: -10px; 
+            width: 7px; height: 10px; background: #ffa500; border-radius: 50%; 
+            box-shadow: 0 0 6px #ffcc33; animation: flicker 0.15s infinite; 
+        }
+        @keyframes flicker { 0%, 100% { transform: scale(1); opacity: 0.9; } 50% { transform: scale(1.1); opacity: 1; } }
 
         #wish-box { font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.9rem; color: var(--gold); margin: 20px 0; opacity: 0; }
         #message { font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.95rem; line-height: 1.8; opacity: 0; transition: opacity 2s ease; }
         .footer { font-size: 0.65rem; color: var(--gold); letter-spacing: 2px; opacity: 0; transition: 3s; margin-top: 30px; }
-        .line { color: var(--gold); font-family: monospace; font-size: 0.75rem; text-align: left; margin: 8px 0; padding-left: 10px; border-left: 2px solid var(--gold); }
         
         .sparkle { position: absolute; pointer-events: none; color: var(--gold); font-size: 20px; z-index: 100; animation: sparkleFade 1s ease-out forwards; }
         @keyframes sparkleFade { 0% { transform: scale(0.5); opacity: 1; } 100% { transform: scale(1.5); opacity: 0; } }
@@ -82,7 +78,7 @@
         <div class="header-section">
             <div class="header-main">
                 <h1>Happy Birthday Joydeep</h1>
-                <span style="font-size:1.3rem; margin-left:5px;">❤️</span>
+                <span class="heart-glow" style="font-size:1.3rem;">❤️</span>
             </div>
             <div class="subheader">I love you Litt dino <span class="dino-bounce" style="font-size:1.3rem;">🦖</span></div>
         </div>
@@ -141,50 +137,62 @@
         }
     }
 
-    function startSurprise() {
-        const audio = document.getElementById('music');
-        audio.play().catch(e => console.log("Audio play blocked", e));
+    async function typeLine(text, container, shouldPlayMusic = false) {
+        const div = document.createElement('div');
+        div.className = "line";
+        container.appendChild(div);
+        
+        if (shouldPlayMusic) {
+            document.getElementById('music').play().catch(() => {});
+        }
 
+        for (let i = 0; i < text.length; i++) {
+            div.innerHTML += text[i];
+            await new Promise(r => setTimeout(r, 45));
+        }
+        await new Promise(r => setTimeout(r, 500));
+    }
+
+    async function startSurprise() {
         document.getElementById('start-screen').style.display = 'none';
         document.getElementById('content').style.display = 'block';
         
-        const lines = [
-            "> SYST_CHECK: OPTIMAL...",
-            "> BYPASSING SECURITY LAYERS...",
-            "> LOADING PERSONAL_DATA...",
-            "> SCANNING FOR LITT DINO...",
-            "> 100% MATCH FOUND: JOYDEEP ❤️",
-            "> INITIALIZING SAHIB JI PROTOCOL..."
-        ];
         const term = document.getElementById('terminal');
-        lines.forEach((l, i) => {
-            setTimeout(() => {
-                let div = document.createElement('div'); div.className = "line"; div.innerText = l;
-                term.appendChild(div);
-                if(i === lines.length - 1) setTimeout(triggerGift, 1500);
-            }, i * 1200);
-        });
+        const lines = [
+            { t: "> SYST_CHECK: OPTIMAL...", m: false },
+            { t: "> BYPASSING SECURITY...", m: false },
+            { t: "> LOADING DATA...", m: false },
+            { t: "> SCANNING FOR LITT DINO...", m: true }, // MUSIC STARTS HERE
+            { t: "> MATCH FOUND: JOYDEEP ❤️", m: false },
+            { t: "> INIT SAHIB JI PROTOCOL...", m: false }
+        ];
+
+        for (let line of lines) {
+            await typeLine(line.t, term, line.m);
+        }
+        
+        setTimeout(triggerGift, 800);
     }
 
     function triggerGift() {
         const term = document.getElementById('terminal');
-        term.style.transition = "opacity 1.5s";
+        term.style.transition = "opacity 1s";
         term.style.opacity = "0";
         
         setTimeout(() => {
             term.style.display = 'none';
             document.getElementById('gift').style.display = 'block';
-            setTimeout(() => document.getElementById('l1').classList.add('visible'), 600);
-            setTimeout(() => document.getElementById('l2').classList.add('visible'), 1400);
-            setTimeout(() => document.getElementById('l3').classList.add('visible'), 2200);
-            setTimeout(() => document.getElementById('ic').classList.add('visible'), 3000);
+            setTimeout(() => document.getElementById('l1').classList.add('visible'), 500);
+            setTimeout(() => document.getElementById('l2').classList.add('visible'), 1200);
+            setTimeout(() => document.getElementById('l3').classList.add('visible'), 1900);
+            setTimeout(() => document.getElementById('ic').classList.add('visible'), 2600);
             setTimeout(() => {
                 document.getElementById('c-group').style.opacity = '1';
                 document.getElementById('wish-box').style.opacity = '1';
                 document.getElementById('message').style.opacity = '1';
                 typeMsg();
-            }, 4000);
-        }, 1500);
+            }, 3500);
+        }, 1000);
     }
 
     function blowOut() {
@@ -202,7 +210,7 @@
             if(i < txt.length) {
                 if(txt.charAt(i) === '<') { i = txt.indexOf('>', i) + 1; } else { i++; }
                 target.innerHTML = txt.substring(0, i);
-                setTimeout(type, 55);
+                setTimeout(type, 50);
             } else { document.getElementById('footer-note').style.opacity = '1'; }
         }
         type();
