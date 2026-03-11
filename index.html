@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+        <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -11,14 +11,13 @@
         
         canvas { position: fixed; top: 0; left: 0; z-index: 1; pointer-events: none; }
         
-        #start-screen { position: fixed; inset: 0; background: #0d1117; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; }
-        .btn { background: var(--gold); color: #0d1117; padding: 18px 40px; border-radius: 50px; border: none; font-weight: bold; font-size: 1rem; cursor: pointer; box-shadow: 0 0 20px rgba(212, 175, 55, 0.3); transition: 0.3s; }
-        .btn:active { transform: scale(0.95); }
+        /* THE MORNING UNWRAP BUTTON */
+        #start-screen { position: fixed; inset: 0; background: #0d1117; display: flex; justify-content: center; align-items: center; z-index: 9999; }
+        .btn { background: var(--gold); border: none; padding: 15px 35px; border-radius: 50px; font-weight: bold; cursor: pointer; color: #0d1117; font-size: 1rem; box-shadow: 0 0 15px rgba(212, 175, 55, 0.4); }
 
-        /* HEADER: One line, Perfect Font, Glowing Emojis */
+        /* ONE LINE HEADER */
         .header-section { margin-bottom: 15px; z-index: 10; position: relative; }
         .header-main { display: flex; align-items: center; justify-content: center; white-space: nowrap; gap: 8px; }
-        
         h1 { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(1.2rem, 5vw, 1.6rem); color: var(--gold); margin: 0; }
         
         .glowing-emojis { 
@@ -30,27 +29,22 @@
 
         .subheader { font-family: 'Montserrat', sans-serif; font-size: 0.85rem; color: var(--champagne); opacity: 0.9; margin-top: 5px; }
 
-        /* SPARKLE TAP EFFECT */
+        /* SPARKLE TAP */
         .sparkle { position: fixed; pointer-events: none; color: var(--gold); font-size: 20px; z-index: 10000; animation: sparkleFade 1s ease-out forwards; }
         @keyframes sparkleFade { 0% { transform: scale(0.5); opacity: 1; } 100% { transform: scale(1.5); opacity: 0; } }
 
-        /* THE CAKE */
+        /* CAKE */
         .cake-container { height: 90px; width: 120px; margin: 20px auto; position: relative; }
         .layer { position: absolute; left: 10px; width: 100px; height: 20px; border-radius: 4px; opacity: 0; transform: translateY(15px); transition: 0.8s ease; }
         .bottom { background: #1a2a3a; bottom: 0; } .mid { background: #243b55; bottom: 20px; } .top { background: #2c5364; bottom: 40px; }
         .icing { background: var(--gold); height: 5px; width: 100px; bottom: 60px; border-radius: 10px; position: absolute; left: 10px; opacity: 0; transition: 0.8s; }
         .visible { opacity: 1 !important; transform: translateY(0) !important; }
 
-        .candle { position: absolute; bottom: 65px; left: 50%; transform: translateX(-50%); width: 4px; height: 16px; background: white; opacity: 0; transition: 1s; cursor: pointer; z-index: 20; }
+        .candle { position: absolute; bottom: 65px; left: 50%; transform: translateX(-50%); width: 4px; height: 16px; background: white; opacity: 0; transition: 1s; cursor: pointer; }
         .flame { position: absolute; top: -9px; left: -2px; width: 8px; height: 10px; background: orange; border-radius: 50%; box-shadow: 0 0 12px orange; animation: flicker 0.1s infinite; }
-        @keyframes flicker { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
 
-        /* THE HEARTBEAT FADE PROMPT */
-        #wish-box { 
-            font-family: 'Playfair Display', serif; font-style: italic; 
-            font-size: 0.85rem; color: var(--gold); margin: 15px 0; 
-            opacity: 0; 
-        }
+        /* HEARTBEAT FADE WISH */
+        #wish-box { font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.85rem; color: var(--gold); margin: 15px 0; opacity: 0; }
         .fade-heartbeat { animation: heartbeatFade 3s infinite ease-in-out; }
         @keyframes heartbeatFade { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
 
@@ -65,7 +59,7 @@
 <canvas id="starField"></canvas>
 
 <div id="start-screen">
-    <button class="btn" onclick="initializeSurprise()">UNWRAP SURPRISE 🦖❤️</button>
+    <button class="btn" onclick="startSurprise()">UNWRAP SURPRISE 🦖❤️</button>
 </div>
 
 <div id="content">
@@ -101,8 +95,7 @@
     let stars = [];
     function setupStars() {
         canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-        stars = [];
-        for(let i=0; i<55; i++) stars.push({x: Math.random()*canvas.width, y: Math.random()*canvas.height, s: Math.random()*1.4});
+        for(let i=0; i<50; i++) stars.push({x: Math.random()*canvas.width, y: Math.random()*canvas.height, s: Math.random()*1.4});
     }
     function drawStars() {
         ctx.clearRect(0,0,canvas.width,canvas.height);
@@ -123,17 +116,17 @@
         setTimeout(() => s.remove(), 1000);
     }
 
-    function initializeSurprise() {
-        const music = document.getElementById('music');
-        music.play().catch(() => {});
+    function startSurprise() {
+        document.getElementById('music').play().catch(() => {});
         document.getElementById('start-screen').style.display = 'none';
         document.getElementById('content').style.display = 'block';
         
+        // THE PERFECT MORNING PROTOCOL LINES
         const lines = [
-            "> INITIALIZING SAHIB JI PROTOCOL...",
+            "> SYST_INIT...",
             "> ACCESSING SECURE DATA...",
-            "> SCANNING FOR LITT DINO...",
-            "> 100% MATCH: JOYDEEP FOUND ❤️",
+            "> SCANNING FOR JOYDEEP...",
+            "> 100% MATCH FOUND 🦖",
             "> LOADING SURPRISE..."
         ];
         const term = document.getElementById('terminal');
@@ -142,48 +135,4 @@
                 let div = document.createElement('div'); div.className = "line"; div.innerText = l;
                 term.appendChild(div);
                 if(i === lines.length - 1) setTimeout(triggerGift, 1200);
-            }, i * 1100);
-        });
-    }
-
-    function triggerGift() {
-        document.getElementById('terminal').style.display = 'none';
-        document.getElementById('gift').style.display = 'block';
-        setTimeout(() => document.getElementById('l1').classList.add('visible'), 300);
-        setTimeout(() => document.getElementById('l2').classList.add('visible'), 800);
-        setTimeout(() => document.getElementById('l3').classList.add('visible'), 1300);
-        setTimeout(() => document.getElementById('ic').classList.add('visible'), 1800);
-        setTimeout(() => {
-            document.getElementById('can').style.opacity = '1';
-            let wish = document.getElementById('wish-box');
-            wish.style.opacity = '1';
-            wish.classList.add('fade-heartbeat'); // Added breathing fade
-            document.getElementById('message').style.opacity = '1';
-            typeMsg();
-        }, 2200);
-    }
-
-    function blowOut() {
-        document.getElementById('f').style.display = 'none';
-        document.getElementById('can').style.opacity = '0.3';
-        let wish = document.getElementById('wish-box');
-        wish.classList.remove('fade-heartbeat');
-        wish.innerText = "Wish sent to the stars for you... ✨";
-        wish.style.color = "#fff";
-    }
-
-    function typeMsg() {
-        const txt = "For me you're the best thing I can ever ask God for. Even tho merese zyada nakhre karte ho but mujhe tumhare nakhre uthna bhi pasand hai. Tumse gussa karna bhi and mere stupid se jokes pe tumhari cute si smile dekhna bhi... <br><br><b>I love you my sahib ji ❤️</b>";
-        let i = 0; const target = document.getElementById('message');
-        function type() {
-            if(i < txt.length) {
-                if(txt.charAt(i) === '<') { i = txt.indexOf('>', i) + 1; } else { i++; }
-                target.innerHTML = txt.substring(0, i);
-                setTimeout(type, 45);
-            } else { document.getElementById('footer-note').style.opacity = '1'; }
-        }
-        type();
-    }
-</script>
-</body>
-</html>
+    
