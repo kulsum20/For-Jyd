@@ -1,4 +1,4 @@
-                <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,64 +7,64 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500&family=Playfair+Display:ital,wght@1,600&family=Great+Vibes&display=swap" rel="stylesheet">
     <style>
         :root { --gold: #d4af37; --champagne: #f7e7ce; }
-        body { margin: 0; background: #0d1117; color: var(--champagne); font-family: 'Montserrat', sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; text-align: center; overflow: hidden; }
-        
-        /* Background Layer for Sparkles */
-        #sparkle-layer { position: fixed; inset: 0; z-index: 5; touch-action: none; }
+        body { margin: 0; background: #0d1117; color: var(--champagne); font-family: 'Montserrat', sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; text-align: center; overflow: hidden; touch-action: manipulation; }
         canvas { position: fixed; top: 0; left: 0; z-index: 1; pointer-events: none; }
         
-        .sparkle { position: absolute; pointer-events: none; color: var(--gold); font-size: 25px; z-index: 9999; animation: sparkleFade 1s ease-out forwards; }
+        /* Floating/Jumping Glow Dino */
+        .dino-container { font-size: 50px; margin-bottom: 10px; display: inline-block; animation: jump 2s ease-in-out infinite; filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.8)); }
+        @keyframes jump { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+        
+        .sparkle { position: fixed; pointer-events: none; color: var(--gold); font-size: 25px; z-index: 9999; animation: sparkleFade 1s ease-out forwards; }
         @keyframes sparkleFade { 0% { transform: scale(0.5); opacity: 1; } 100% { transform: scale(1.5); opacity: 0; } }
 
-        .smoke { position: fixed; pointer-events: none; z-index: 10000; font-size: 25px; filter: blur(3px); animation: smokeFly 2.5s ease-out forwards; }
-        @keyframes smokeFly { 0% { transform: translate(-50%, 0); opacity: 0.6; } 100% { transform: translate(var(--sx), var(--sy)) scale(4); opacity: 0; } }
-
         #start-screen { position: fixed; inset: 0; background: #0d1117; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 100; }
-        .btn { background: var(--gold); color: #0d1117; padding: 18px 40px; border-radius: 50px; border: none; font-weight: bold; font-size: 1.1rem; cursor: pointer; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4); z-index: 110; position: relative; }
+        .btn { background: var(--gold); color: #0d1117; padding: 15px 35px; border-radius: 50px; border: none; font-weight: bold; font-size: 1rem; cursor: pointer; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4); z-index: 101; letter-spacing: 1px; }
         
-        #content { display: none; width: 90%; max-width: 450px; z-index: 10; padding: 25px; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border-radius: 20px; border: 1px solid rgba(212, 175, 55, 0.2); }
-        .line { font-family: monospace; color: var(--gold); margin: 10px 0; text-align: left; font-size: 0.8rem; }
+        #content { display: none; width: 85%; max-width: 400px; z-index: 10; padding: 20px; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border-radius: 20px; border: 1px solid rgba(212, 175, 55, 0.2); }
+        .line { font-family: monospace; color: var(--gold); margin: 8px 0; text-align: left; font-size: 0.8rem; }
         
-        h1 { font-family: 'Great Vibes', cursive; color: var(--gold); font-size: 2.8rem; margin: 10px 0; text-shadow: 0 0 15px rgba(212, 175, 55, 0.6); }
-        .title-glow { text-shadow: 0 0 15px rgba(255, 0, 0, 0.6); display: inline-block; margin-left: 10px; }
+        /* Elegant Romantic Font */
+        h1 { font-family: 'Great Vibes', cursive; color: var(--gold); font-size: 2.2rem; margin: 5px 0; text-shadow: 0 0 10px rgba(212, 175, 55, 0.4); }
+        .heart-glow { filter: drop-shadow(0 0 8px rgba(255, 0, 0, 0.6)); font-size: 1.5rem; }
 
-        .cake { position: relative; width: 140px; height: 120px; margin: 20px auto; display: none; }
-        .layer { position: absolute; width: 100%; height: 25px; border-radius: 5px; opacity: 0; transform: translateY(10px); transition: 0.8s; left:0; }
-        .bottom { background: #1a2a3a; bottom: 0; } .middle { background: #243b55; bottom: 25px; } .top { background: #2c5364; bottom: 50px; }
-        .icing { position: absolute; width: 100%; height: 8px; background: var(--gold); bottom: 75px; border-radius: 10px; opacity: 0; transition: 0.8s; left:0; }
-        .show-layer { opacity: 1 !important; transform: translateY(0) !important; }
+        .cake { position: relative; width: 120px; height: 100px; margin: 15px auto; display: none; }
+        .layer { position: absolute; width: 100%; height: 20px; border-radius: 5px; opacity: 0; transition: 0.8s; left:0; }
+        .bottom { background: #1a2a3a; bottom: 0; } .middle { background: #243b55; bottom: 20px; } .top { background: #2c5364; bottom: 40px; }
+        .icing { position: absolute; width: 100%; height: 6px; background: var(--gold); bottom: 60px; border-radius: 10px; opacity: 0; transition: 0.8s; left:0; }
+        .show-layer { opacity: 1 !important; }
         
-        .candle { position: absolute; width: 10px; height: 30px; background: white; bottom: 81px; opacity: 0; transition: 1s; left: 46%; cursor: pointer; z-index: 120; }
-        .flame { position: absolute; top: -12px; left: 1px; width: 10px; height: 14px; background: orange; border-radius: 50%; box-shadow: 0 0 12px orange; animation: flicker 0.1s infinite; pointer-events: none; }
+        .candle { position: absolute; width: 4px; height: 18px; background: white; bottom: 66px; opacity: 0; transition: 1s; left: 48%; cursor: pointer; }
+        .flame { position: absolute; top: -10px; left: -2px; width: 8px; height: 10px; background: orange; border-radius: 50%; box-shadow: 0 0 10px orange; animation: flicker 0.1s infinite; }
         @keyframes flicker { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
         
-        #message { line-height: 1.8; font-style: italic; margin-top: 20px; font-size: 0.95rem; text-align: center; }
-        .love-center { display: block; color: var(--gold); font-weight: 500; font-size: 1.1rem; margin-top: 15px; font-style: normal; }
-        .footer { font-size: 0.75rem; opacity: 0; transition: 3s; margin-top: 30px; color: var(--gold); letter-spacing: 2px; }
+        #message { line-height: 1.8; font-family: 'Playfair Display', serif; font-style: italic; margin-top: 15px; font-size: 1rem; text-align: center; }
+        .love-center { display: block; color: var(--gold); font-size: 1.1rem; margin-top: 10px; font-style: normal; text-shadow: 0 0 8px rgba(212, 175, 55, 0.3); }
+        .footer { font-size: 0.7rem; opacity: 0; transition: 3s; margin-top: 25px; color: var(--gold); letter-spacing: 2px; }
     </style>
 </head>
-<body>
-
-<div id="sparkle-layer" onclick="createSparkle(event)"></div>
+<body onclick="createSparkle(event)">
 
 <canvas id="starField"></canvas>
 
 <div id="start-screen">
-    <h2 style="font-family:'Playfair Display'; font-style: italic; letter-spacing:3px; margin-bottom:40px;">A GIFT FOR MY SAHIB JI</h2>
-    <button class="btn" onclick="start()">UNWRAP YOUR SURPRISE 🦖❤️</button>
+    <h2 style="font-family:'Playfair Display'; font-style: italic; letter-spacing:4px; margin-bottom:30px;">A GIFT FOR MY SAHIB JI</h2>
+    <button class="btn" onclick="start()">UNWRAP SURPRISE 🦖❤️</button>
 </div>
 
 <div id="content">
     <div id="terminal"></div>
     <div id="final-gift" style="display:none;">
-        <h1>Happy Birthday Joydeep<span class="title-glow">🦖❤️</span></h1>
+        <div class="dino-container">🦖</div>
+        <h1>Happy Birthday Joydeep <span class="heart-glow">❤️</span></h1>
+        
         <div class="cake" id="the-cake">
             <div class="layer bottom" id="l1"></div>
             <div class="layer middle" id="l2"></div>
             <div class="layer top" id="l3"></div>
             <div class="icing" id="icing"></div>
-            <div class="candle" id="c1" onclick="blowOut()"><div class="flame" id="flame"></div></div>
+            <div class="candle" id="c1" onclick="this.style.opacity=0; document.getElementById('flame').style.display='none';"><div class="flame" id="flame"></div></div>
         </div>
+        
         <div id="message"></div>
         <div id="footer-note" class="footer">MADE WITH LOVE FOR JOYDEEP ❤️</div>
     </div>
@@ -74,49 +74,45 @@
 
 <script>
     function createSparkle(e) {
+        if (e.target.id === 'c1' || e.target.className === 'btn') return;
         const s = document.createElement('div');
         s.className = 'sparkle'; s.innerHTML = '✨';
         s.style.left = (e.clientX - 10) + 'px'; s.style.top = (e.clientY - 10) + 'px';
-        document.getElementById('sparkle-layer').appendChild(s);
+        document.body.appendChild(s);
         setTimeout(() => s.remove(), 1000);
     }
 
-    // Star Background
     const canvas = document.getElementById('starField');
     const ctx = canvas.getContext('2d');
     let stars = [];
     function setup() {
         canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-        for(let i=0; i<45; i++) stars.push({x: Math.random()*canvas.width, y: Math.random()*canvas.height, s: Math.random()*1.5});
+        for(let i=0; i<40; i++) stars.push({x: Math.random()*canvas.width, y: Math.random()*canvas.height, s: Math.random()*1.2});
     }
     function draw() {
         ctx.clearRect(0,0,canvas.width,canvas.height); ctx.fillStyle = "rgba(212, 175, 55, 0.4)";
         stars.forEach(p => {
             ctx.beginPath(); ctx.arc(p.x, p.y, p.s, 0, 7); ctx.fill();
-            p.y -= 0.15; if(p.y < 0) p.y = canvas.height;
+            p.y -= 0.1; if(p.y < 0) p.y = canvas.height;
         });
         requestAnimationFrame(draw);
     }
     setup(); draw();
 
     function start() {
-        const music = document.getElementById('bdayMusic');
-        music.play().catch(() => {});
+        document.getElementById('bdayMusic').play().catch(() => {});
         document.getElementById('start-screen').style.display = 'none';
         document.getElementById('content').style.display = 'block';
-        runTerminal();
-    }
-
-    function runTerminal() {
-        const lines = ["> SYST_INIT...", "> SCANNING...", "> MATCH: JOYDEEP 🦖", "> SAHIB JI PROTOCOL LOADED!"];
-        const container = document.getElementById('terminal');
+        
+        const lines = ["> Initializing...", "> Match: Joydeep 🦖", "> Sahib Ji Protocol Active!"];
+        const term = document.getElementById('terminal');
         let i = 0;
         function showLine() {
             if (i < lines.length) {
-                let d = document.createElement('div'); d.className = "line"; d.innerHTML = lines[i];
-                container.appendChild(d); i++; setTimeout(showLine, 800);
+                let d = document.createElement('div'); d.className = "line"; d.innerText = lines[i];
+                term.appendChild(d); i++; setTimeout(showLine, 800);
             } else {
-                setTimeout(() => { container.style.display = 'none'; showFinal(); }, 800);
+                setTimeout(() => { term.style.display = 'none'; showFinal(); }, 800);
             }
         }
         showLine();
@@ -133,40 +129,19 @@
 
     function typeText() {
         const text = "For me you're the best thing I can ever ask God for. Even tho merese zyada nakhre karte ho but mujhe tumhare nakhre uthna bhi pasand hai. Tumse gussa karna bhi and mere stupid se jokes pe tumhari cute si smile dekhna bhi… and that hot wink. <br><span class='love-center'>I love you my sahib ji ❤️</span>";
-        let textIdx = 0;
-        const msg = document.getElementById('message');
-        let isTag = false;
+        let j = 0; const msg = document.getElementById('message');
         function type() {
-            if (textIdx < text.length) {
-                let char = text.charAt(textIdx);
-                if (char === "<") isTag = true;
-                if (char === ">") isTag = false;
-                msg.innerHTML += char;
-                textIdx++;
-                if (isTag) type(); else setTimeout(type, 45);
-            } else {
-                setTimeout(() => { document.getElementById('footer-note').style.opacity = 1; }, 500);
-            }
+            if (j < text.length) {
+                if (text.charAt(j) === '<') { 
+                    let end = text.indexOf('>', j); 
+                    msg.innerHTML += text.substring(j, end+1); j = end+1; 
+                } else { 
+                    msg.innerHTML += text.charAt(j); j++; 
+                }
+                setTimeout(type, 45);
+            } else { document.getElementById('footer-note').style.opacity = 1; }
         }
         type();
-    }
-
-    function blowOut() {
-        const flame = document.getElementById('flame');
-        if(flame) {
-            flame.style.display = 'none';
-            for(let i = 0; i < 6; i++) {
-                setTimeout(() => {
-                    const s = document.createElement('div');
-                    s.className = 'smoke'; s.innerHTML = '☁️';
-                    s.style.left = '50%'; s.style.top = '45%';
-                    s.style.setProperty('--sx', `${(Math.random()-0.5)*150}px`);
-                    s.style.setProperty('--sy', `${(Math.random()*-250)-50}px`);
-                    document.body.appendChild(s);
-                    setTimeout(() => s.remove(), 2500);
-                }, i * 150);
-            }
-        }
     }
 </script>
 </body>
