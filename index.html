@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+        <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,87 +6,70 @@
     <title>For Joydeep 🦖❤️</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,600&family=Montserrat:wght@300&display=swap" rel="stylesheet">
     <style>
-        :root { 
-            --gold: #ffcc33; 
-            --champagne: #f7e7ce; 
-            --glow: rgba(255, 204, 51, 0.7); 
-        }
-        
-        body { 
-            margin: 0; background: #080a0f; color: var(--champagne); 
-            font-family: 'Montserrat', sans-serif; display: flex; 
-            justify-content: center; align-items: center; height: 100vh; 
-            text-align: center; overflow: hidden; touch-action: manipulation; 
-        }
+        :root { --gold: #d4af37; --champagne: #f7e7ce; --glow: rgba(212, 175, 55, 0.4); }
+        body { margin: 0; background: #080a0f; color: var(--champagne); font-family: 'Montserrat', sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; text-align: center; overflow: hidden; touch-action: manipulation; }
         
         canvas { position: fixed; top: 0; left: 0; z-index: 1; pointer-events: none; }
         
         /* UNWRAP SCREEN */
-        #start-screen { position: fixed; inset: 0; background: #080a0f; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; }
+        #start-screen { position: fixed; inset: 0; background: #0d1117; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; }
         .unwrap-text { font-family: 'Playfair Display', serif; font-style: italic; letter-spacing: 2px; margin-bottom: 20px; color: var(--gold); }
-        .btn { background: var(--gold); border: none; padding: 15px 35px; border-radius: 50px; font-weight: bold; cursor: pointer; color: #0d1117; font-size: 0.9rem; box-shadow: 0 0 15px rgba(255, 204, 51, 0.4); text-transform: uppercase; letter-spacing: 1px; }
+        .btn { background: var(--gold); border: none; padding: 15px 35px; border-radius: 50px; font-weight: bold; cursor: pointer; color: #0d1117; font-size: 0.9rem; box-shadow: 0 0 15px rgba(212, 175, 55, 0.4); text-transform: uppercase; letter-spacing: 1px; }
 
-        /* THE BOX - Enhanced for Vibrancy */
+        /* CONTENT CONTAINER - Softer Shape Fix */
         #content { 
             display: none; width: 88%; max-width: 380px; z-index: 10; padding: 25px; 
-            border-radius: 20px; 
-            background: linear-gradient(145deg, rgba(25, 30, 40, 0.98), rgba(10, 12, 18, 0.99));
-            backdrop-filter: blur(15px); 
-            border: 1px solid rgba(255, 204, 51, 0.25);
+            border-radius: 35px; /* Sgnificantly softer, less squared corners */
+            background: rgba(255,255,255,0.02); 
+            backdrop-filter: blur(12px); border: 1px solid rgba(212, 175, 55, 0.15);
             position: relative; overflow: hidden;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
         }
 
-        .header-section { margin-bottom: 20px; position: relative; }
+        .header-section { margin-bottom: 15px; position: relative; }
         .header-main { display: flex; align-items: center; justify-content: center; white-space: nowrap; gap: 8px; }
-        h1 { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(1.2rem, 5vw, 1.65rem); color: var(--gold); margin: 0; text-shadow: 0 0 10px rgba(255, 204, 51, 0.25); }
+        h1 { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(1.2rem, 5vw, 1.6rem); color: var(--gold); margin: 0; }
         
-        /* GLOW & BOUNCE FOR BOTH EMOJIS */
-        .glow-bounce { 
-            display: inline-block;
+        /* GLOWING BOUNCY EMOJIS */
+        .glowing-emojis { 
+            display: flex; gap: 5px; font-size: 1.2rem; 
             filter: drop-shadow(0 0 12px var(--glow)); 
             animation: boing 0.8s infinite alternate ease-in-out; 
         }
-        @keyframes boing { from { transform: translateY(0); } to { transform: translateY(-8px); } }
+        @keyframes boing { from { transform: translateY(0); } to { transform: translateY(-6px); } }
 
-        .subheader { font-family: 'Montserrat', sans-serif; font-size: 0.85rem; color: var(--champagne); opacity: 0.95; margin-top: 8px; }
+        .subheader { font-family: 'Montserrat', sans-serif; font-size: 0.85rem; color: var(--champagne); opacity: 0.9; margin-top: 5px; }
 
-        /* SPARKLES INSIDE BOX */
+        /* SPARKLE TAP EFFECT */
         .sparkle { position: absolute; pointer-events: none; color: var(--gold); font-size: 20px; z-index: 100; animation: sparkleFade 1s ease-out forwards; }
         @keyframes sparkleFade { 0% { transform: scale(0.5); opacity: 1; } 100% { transform: scale(1.5); opacity: 0; } }
 
-        /* CAKE & MAGICAL GLOW */
-        .cake-container { height: 95px; width: 120px; margin: 25px auto; position: relative; }
-        .cake-container::after {
-            content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: 140px; height: 140px; background: radial-gradient(circle, rgba(255, 204, 51, 0.15) 0%, transparent 70%);
-            z-index: -1;
-        }
+        /* CAKE DESIGN */
+        .cake-container { height: 90px; width: 120px; margin: 20px auto; position: relative; }
         .layer { position: absolute; left: 10px; width: 100px; height: 20px; border-radius: 4px; opacity: 0; transform: translateY(15px); transition: 0.8s ease; }
         .bottom { background: #1a2a3a; bottom: 0; } .mid { background: #243b55; bottom: 20px; } .top { background: #2c5364; bottom: 40px; }
         .icing { background: var(--gold); height: 5px; width: 100px; bottom: 60px; border-radius: 10px; position: absolute; left: 10px; opacity: 0; transition: 0.8s; }
         .visible { opacity: 1 !important; transform: translateY(0) !important; }
 
-        .candle { position: absolute; bottom: 65px; left: 50%; transform: translateX(-50%); width: 4px; height: 16px; background: white; opacity: 0; transition: 1s; cursor: pointer; }
-        .flame { position: absolute; top: -9px; left: -2px; width: 8px; height: 10px; background: orange; border-radius: 50%; box-shadow: 0 0 12px orange; animation: flicker 0.1s infinite; }
+        /* MULTIPLE CANDLES SETUP */
+        .candles-group { position: absolute; bottom: 65px; left: 50%; transform: translateX(-50%); width: 100px; display: flex; justify-content: space-around; opacity: 0; transition: 1s; }
+        .candle { width: 5px; height: 18px; background: white; border-radius: 2px; position: relative; cursor: pointer; transition: 0.5s; z-index: 20; }
+        .flame { position: absolute; top: -11px; left: -2px; width: 9px; height: 12px; background: orange; border-radius: 50%; box-shadow: 0 0 15px orange; animation: flicker 0.1s infinite; }
+        @keyframes flicker { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.1); opacity: 0.9; } }
 
-        /* TEXT AREAS */
-        #wish-box { font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.9rem; color: var(--gold); margin: 20px 0; opacity: 0; }
-        .fade-heartbeat { animation: heartbeatFade 3s infinite ease-in-out; }
-        @keyframes heartbeatFade { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
-
-        #message { font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.95rem; line-height: 1.8; opacity: 0; transition: opacity 2s ease; text-shadow: 0 1px 2px rgba(0,0,0,0.5); }
-        .footer { font-size: 0.65rem; color: var(--gold); letter-spacing: 2px; opacity: 0; transition: 3s; margin-top: 25px; font-weight: bold; }
-        .line { color: var(--gold); font-family: monospace; font-size: 0.75rem; text-align: left; margin: 8px 0; border-left: 2px solid var(--gold); padding-left: 8px; }
+        #wish-box { font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.85rem; color: var(--gold); margin: 10px 0; opacity: 0; transition: opacity 2s ease-in-out; }
+        #message { font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.95rem; line-height: 1.7; opacity: 0; transition: opacity 1.5s ease; }
+        .footer { font-size: 0.6rem; color: var(--gold); letter-spacing: 2px; opacity: 0; transition: 2s; margin-top: 20px; text-transform: uppercase; }
+        .line { color: var(--gold); font-family: monospace; font-size: 0.75rem; text-align: left; margin: 4px 0; }
     </style>
 </head>
-<body onclick="handleTap(event)">
+<body onclick="createSparkle(event)">
 
 <canvas id="starField"></canvas>
 
 <div id="start-screen">
     <div class="unwrap-text">A Gift for my Sahib Ji</div>
-    <button class="btn" onclick="startSurprise()">START THE MAGIC, SAHIB JI 🪄</button>
+    <button class="btn" onclick="initializeSurprise()">START THE MAGIC, SAHIB JI 🪄</button>
 </div>
 
 <div id="content">
@@ -95,9 +78,9 @@
         <div class="header-section">
             <div class="header-main">
                 <h1>Happy Birthday Joydeep</h1>
-                <span class="glow-bounce" style="font-size:1.3rem; margin-left:8px;">❤️</span>
+                <div class="glowing-emojis"><span>❤️</span></div>
             </div>
-            <div class="subheader">I love you Litt dino <span class="glow-bounce" style="font-size:1.2rem;">🦖</span></div>
+            <div class="subheader">I love you Litt dino 🦖</div>
         </div>
         
         <div class="cake-container">
@@ -105,120 +88,4 @@
             <div id="l2" class="layer mid"></div>
             <div id="l3" class="layer top"></div>
             <div id="ic" class="icing"></div>
-            <div id="can" class="candle" onclick="blowOut()"><div class="flame" id="f"></div></div>
-        </div>
-
-        <div id="wish-box">Close your eyes & wish upon a star... ✨</div>
-        <div id="message"></div>
-        <div id="footer-note" class="footer">MADE WITH LOVE FOR JOYDEEP ❤️</div>
-    </div>
-</div>
-
-<audio id="music" loop preload="auto"><source src="mastmaganmusic.mp3" type="audio/mpeg"></audio>
-
-<script>
-    const canvas = document.getElementById('starField');
-    const ctx = canvas.getContext('2d');
-    let stars = [];
-    function setupStars() {
-        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-        for(let i=0; i<60; i++) stars.push({x: Math.random()*canvas.width, y: Math.random()*canvas.height, s: Math.random()*1.5});
-    }
-    function drawStars() {
-        ctx.clearRect(0,0,canvas.width,canvas.height);
-        ctx.fillStyle = "rgba(255, 204, 51, 0.4)";
-        stars.forEach(p => {
-            ctx.beginPath(); ctx.arc(p.x, p.y, p.s, 0, Math.PI*2); ctx.fill();
-            p.y -= 0.15; if(p.y < 0) p.y = canvas.height;
-        });
-        requestAnimationFrame(drawStars);
-    }
-    setupStars(); drawStars();
-
-    function handleTap(e) {
-        const box = document.getElementById('content');
-        if (box.style.display === 'block') {
-            const rect = box.getBoundingClientRect();
-            if (e.clientX >= rect.left && e.clientX <= rect.right && 
-                e.clientY >= rect.top && e.clientY <= rect.bottom) {
-                const s = document.createElement('div');
-                s.className = 'sparkle'; s.innerHTML = '✨';
-                s.style.left = (e.clientX - rect.left) + 'px';
-                s.style.top = (e.clientY - rect.top) + 'px';
-                box.appendChild(s);
-                setTimeout(() => s.remove(), 1000);
-            }
-        }
-    }
-
-    function startSurprise() {
-        document.getElementById('music').play().catch(() => {});
-        document.getElementById('start-screen').style.display = 'none';
-        document.getElementById('content').style.display = 'block';
-        
-        const lines = [
-            "> SYST_CHECK: OPTIMAL...",
-            "> BYPASSING SECURITY LAYERS...",
-            "> LOADING PERSONAL_DATA...",
-            "> SCANNING FOR LITT DINO...",
-            "> 100% MATCH FOUND: JOYDEEP ❤️",
-            "> INITIALIZING SAHIB JI PROTOCOL..."
-        ];
-        const term = document.getElementById('terminal');
-        lines.forEach((l, i) => {
-            setTimeout(() => {
-                let div = document.createElement('div'); div.className = "line"; div.innerText = l;
-                term.appendChild(div);
-                if(i === lines.length - 1) setTimeout(triggerGift, 1500);
-            }, i * 1200);
-        });
-    }
-
-    function triggerGift() {
-        const term = document.getElementById('terminal');
-        term.style.transition = "opacity 1.5s";
-        term.style.opacity = "0";
-        
-        setTimeout(() => {
-            term.style.display = 'none';
-            document.getElementById('gift').style.display = 'block';
             
-            setTimeout(() => document.getElementById('l1').classList.add('visible'), 600);
-            setTimeout(() => document.getElementById('l2').classList.add('visible'), 1400);
-            setTimeout(() => document.getElementById('l3').classList.add('visible'), 2200);
-            setTimeout(() => document.getElementById('ic').classList.add('visible'), 3000);
-            
-            setTimeout(() => {
-                document.getElementById('can').style.opacity = '1';
-                let wish = document.getElementById('wish-box');
-                wish.style.opacity = '1';
-                wish.classList.add('fade-heartbeat');
-                document.getElementById('message').style.opacity = '1';
-                typeMsg();
-            }, 4000);
-        }, 1500);
-    }
-
-    function blowOut() {
-        document.getElementById('f').style.display = 'none';
-        document.getElementById('can').style.opacity = '0.3';
-        let wish = document.getElementById('wish-box');
-        wish.classList.remove('fade-heartbeat');
-        wish.innerText = "Wish sent to the stars for you... ✨";
-    }
-
-    function typeMsg() {
-        const txt = "For me you're the best thing I can ever ask God for. Even tho merese zyada nakhre karte ho but mujhe tumhare nakhre uthna bhi pasand hai. Tumse gussa karna bhi and mere stupid se jokes pe tumhari cute si smile dekhna bhi... <br><br><b>I love you my sahib ji ❤️</b>";
-        let i = 0; const target = document.getElementById('message');
-        function type() {
-            if(i < txt.length) {
-                if(txt.charAt(i) === '<') { i = txt.indexOf('>', i) + 1; } else { i++; }
-                target.innerHTML = txt.substring(0, i);
-                setTimeout(type, 55);
-            } else { document.getElementById('footer-note').style.opacity = '1'; }
-        }
-        type();
-    }
-</script>
-</body>
-</html>
