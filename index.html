@@ -14,14 +14,20 @@
         /* UNWRAP SCREEN */
         #start-screen { position: fixed; inset: 0; background: #0d1117; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; }
         .unwrap-text { font-family: 'Playfair Display', serif; font-style: italic; letter-spacing: 2px; margin-bottom: 20px; color: var(--gold); }
-        .btn { background: var(--gold); border: none; padding: 15px 35px; border-radius: 50px; font-weight: bold; cursor: pointer; color: #0d1117; font-size: 1rem; box-shadow: 0 0 15px rgba(212, 175, 55, 0.4); }
+        .btn { background: var(--gold); border: none; padding: 15px 35px; border-radius: 50px; font-weight: bold; cursor: pointer; color: #0d1117; font-size: 0.9rem; box-shadow: 0 0 15px rgba(212, 175, 55, 0.4); text-transform: uppercase; letter-spacing: 1px; }
 
-        /* HEADER SECTION */
-        .header-section { margin-bottom: 15px; z-index: 10; position: relative; }
+        /* THE BOX */
+        #content { 
+            display: none; width: 88%; max-width: 380px; z-index: 10; padding: 25px; 
+            border-radius: 20px; background: rgba(255,255,255,0.02); 
+            backdrop-filter: blur(12px); border: 1px solid rgba(212, 175, 55, 0.15);
+            position: relative; overflow: hidden; 
+        }
+
+        .header-section { margin-bottom: 15px; position: relative; }
         .header-main { display: flex; align-items: center; justify-content: center; white-space: nowrap; gap: 8px; }
         h1 { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(1.2rem, 5vw, 1.6rem); color: var(--gold); margin: 0; }
         
-        /* GLOW & BOUNCE FOR BOTH EMOJIS */
         .glow-bounce { 
             display: inline-block;
             filter: drop-shadow(0 0 12px var(--glow)); 
@@ -30,6 +36,9 @@
         @keyframes boing { from { transform: translateY(0); } to { transform: translateY(-6px); } }
 
         .subheader { font-family: 'Montserrat', sans-serif; font-size: 0.85rem; color: var(--champagne); opacity: 0.9; margin-top: 5px; }
+
+        .sparkle { position: absolute; pointer-events: none; color: var(--gold); font-size: 20px; z-index: 100; animation: sparkleFade 1s ease-out forwards; }
+        @keyframes sparkleFade { 0% { transform: scale(0.5); opacity: 1; } 100% { transform: scale(1.5); opacity: 0; } }
 
         /* CAKE */
         .cake-container { height: 90px; width: 120px; margin: 20px auto; position: relative; }
@@ -41,24 +50,22 @@
         .candle { position: absolute; bottom: 65px; left: 50%; transform: translateX(-50%); width: 4px; height: 16px; background: white; opacity: 0; transition: 1s; cursor: pointer; }
         .flame { position: absolute; top: -9px; left: -2px; width: 8px; height: 10px; background: orange; border-radius: 50%; box-shadow: 0 0 12px orange; animation: flicker 0.1s infinite; }
 
-        /* FADE PROMPT */
         #wish-box { font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.85rem; color: var(--gold); margin: 15px 0; opacity: 0; }
         .fade-heartbeat { animation: heartbeatFade 3s infinite ease-in-out; }
         @keyframes heartbeatFade { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
 
-        #content { display: none; width: 88%; max-width: 380px; z-index: 10; padding: 25px; border-radius: 20px; background: rgba(255,255,255,0.02); backdrop-filter: blur(12px); border: 1px solid rgba(212, 175, 55, 0.15); }
-        #message { font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.95rem; line-height: 1.7; opacity: 0; transition: opacity 1.5s ease; }
-        .footer { font-size: 0.6rem; color: var(--gold); letter-spacing: 2px; opacity: 0; transition: 2s; margin-top: 25px; }
-        .line { color: var(--gold); font-family: monospace; font-size: 0.8rem; text-align: left; margin: 8px 0; }
+        #message { font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.95rem; line-height: 1.7; opacity: 0; transition: opacity 2.5s ease; }
+        .footer { font-size: 0.6rem; color: var(--gold); letter-spacing: 2px; opacity: 0; transition: 3s; margin-top: 25px; }
+        .line { color: var(--gold); font-family: monospace; font-size: 0.75rem; text-align: left; margin: 8px 0; }
     </style>
 </head>
-<body onclick="createSparkle(event)">
+<body onclick="handleTap(event)">
 
 <canvas id="starField"></canvas>
 
 <div id="start-screen">
     <div class="unwrap-text">A Gift for my Sahib Ji</div>
-    <button class="btn" onclick="startSurprise()">UNWRAP SURPRISE 🦖❤️</button>
+    <button class="btn" onclick="startSurprise()">START THE MAGIC, SAHIB JI 🪄</button>
 </div>
 
 <div id="content">
@@ -107,12 +114,20 @@
     }
     setupStars(); drawStars();
 
-    function createSparkle(e) {
-        const s = document.createElement('div');
-        s.className = 'sparkle'; s.innerHTML = '✨';
-        s.style.left = e.clientX + 'px'; s.style.top = e.clientY + 'px';
-        document.body.appendChild(s);
-        setTimeout(() => s.remove(), 1000);
+    function handleTap(e) {
+        const box = document.getElementById('content');
+        if (box.style.display === 'block') {
+            const rect = box.getBoundingClientRect();
+            if (e.clientX >= rect.left && e.clientX <= rect.right && 
+                e.clientY >= rect.top && e.clientY <= rect.bottom) {
+                const s = document.createElement('div');
+                s.className = 'sparkle'; s.innerHTML = '✨';
+                s.style.left = (e.clientX - rect.left) + 'px';
+                s.style.top = (e.clientY - rect.top) + 'px';
+                box.appendChild(s);
+                setTimeout(() => s.remove(), 1000);
+            }
+        }
     }
 
     function startSurprise() {
@@ -120,12 +135,12 @@
         document.getElementById('start-screen').style.display = 'none';
         document.getElementById('content').style.display = 'block';
         
-        // AFTERNOON ORDER: Sahib Ji Protocol comes LAST
         const lines = [
-            "> SYST_INIT...",
-            "> ACCESSING SECURE DATA...",
-            "> SCANNING FOR JOYDEEP...",
-            "> MATCH FOUND 🦖",
+            "> SYST_CHECK: OPTIMAL...",
+            "> BYPASSING SECURITY LAYERS...",
+            "> LOADING PERSONAL_DATA...",
+            "> SCANNING FOR LITT DINO...",
+            "> 100% MATCH FOUND: JOYDEEP ❤️",
             "> INITIALIZING SAHIB JI PROTOCOL..."
         ];
         const term = document.getElementById('terminal');
@@ -133,26 +148,34 @@
             setTimeout(() => {
                 let div = document.createElement('div'); div.className = "line"; div.innerText = l;
                 term.appendChild(div);
-                if(i === lines.length - 1) setTimeout(triggerGift, 1200);
-            }, i * 1100);
+                if(i === lines.length - 1) setTimeout(triggerGift, 1500);
+            }, i * 1200);
         });
     }
 
     function triggerGift() {
-        document.getElementById('terminal').style.display = 'none';
-        document.getElementById('gift').style.display = 'block';
-        setTimeout(() => document.getElementById('l1').classList.add('visible'), 300);
-        setTimeout(() => document.getElementById('l2').classList.add('visible'), 800);
-        setTimeout(() => document.getElementById('l3').classList.add('visible'), 1300);
-        setTimeout(() => document.getElementById('ic').classList.add('visible'), 1800);
+        const term = document.getElementById('terminal');
+        term.style.transition = "opacity 1.5s";
+        term.style.opacity = "0";
+        
         setTimeout(() => {
-            document.getElementById('can').style.opacity = '1';
-            let wish = document.getElementById('wish-box');
-            wish.style.opacity = '1';
-            wish.classList.add('fade-heartbeat');
-            document.getElementById('message').style.opacity = '1';
-            typeMsg();
-        }, 2200);
+            term.style.display = 'none';
+            document.getElementById('gift').style.display = 'block';
+            
+            setTimeout(() => document.getElementById('l1').classList.add('visible'), 600);
+            setTimeout(() => document.getElementById('l2').classList.add('visible'), 1400);
+            setTimeout(() => document.getElementById('l3').classList.add('visible'), 2200);
+            setTimeout(() => document.getElementById('ic').classList.add('visible'), 3000);
+            
+            setTimeout(() => {
+                document.getElementById('can').style.opacity = '1';
+                let wish = document.getElementById('wish-box');
+                wish.style.opacity = '1';
+                wish.classList.add('fade-heartbeat');
+                document.getElementById('message').style.opacity = '1';
+                typeMsg();
+            }, 4000);
+        }, 1500);
     }
 
     function blowOut() {
@@ -170,7 +193,7 @@
             if(i < txt.length) {
                 if(txt.charAt(i) === '<') { i = txt.indexOf('>', i) + 1; } else { i++; }
                 target.innerHTML = txt.substring(0, i);
-                setTimeout(type, 45);
+                setTimeout(type, 55);
             } else { document.getElementById('footer-note').style.opacity = '1'; }
         }
         type();
