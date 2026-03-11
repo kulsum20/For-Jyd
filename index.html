@@ -50,7 +50,7 @@
 </div>
 
 <audio id="bdayMusic" loop preload="auto">
-    <source src="https://cdn.pixabay.com/audio/2022/02/07/audio_d0c6ff1101.mp3" type="audio/mpeg">
+    <source src="mastmaganmusic.mp3" type="audio/mpeg">
 </audio>
 
 <script>
@@ -74,24 +74,14 @@
 
     function start() { 
         const music = document.getElementById('bdayMusic');
-        music.volume = 1.0;
-        music.play().then(() => {
-            console.log("Playback started!");
-        }).catch((error) => {
-            console.log("Playback failed:", error);
-        }); 
+        music.play().catch(e => console.log("Music error:", e)); 
         document.getElementById('start-screen').style.display = 'none'; 
         document.getElementById('content').style.display = 'block'; 
         runConsole(); 
     }
 
     function runConsole() {
-        const lines = [
-            "> Initializing...",
-            "> Scanning for Joydeep...",
-            "> 100% Match Found 🦖",
-            "> Loading Sahib Ji Protocol..."
-        ];
+        const lines = ["> Initializing...", "> Scanning for Joydeep...", "> 100% Match Found 🦖", "> Loading Sahib Ji Protocol..."];
         const container = document.getElementById('console'); let i = 0;
         function showLine() {
             if (i < lines.length) {
