@@ -16,7 +16,7 @@
         .unwrap-text { font-family: 'Playfair Display', serif; font-style: italic; letter-spacing: 2px; margin-bottom: 20px; color: var(--gold); }
         .btn { background: var(--gold); border: none; padding: 15px 35px; border-radius: 50px; font-weight: bold; cursor: pointer; color: #0d1117; font-size: 0.9rem; box-shadow: 0 0 20px rgba(255, 204, 51, 0.5); text-transform: uppercase; letter-spacing: 1px; }
 
-        /* THE BOX - SOFT & VIBRANT */
+        /* THE BOX */
         #content { 
             display: none; width: 88%; max-width: 380px; z-index: 10; padding: 25px; 
             border-radius: 35px; 
@@ -30,38 +30,44 @@
         .header-main { display: flex; align-items: center; justify-content: center; white-space: nowrap; gap: 8px; }
         h1 { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(1.2rem, 5vw, 1.6rem); color: var(--gold); margin: 0; text-shadow: 0 0 10px rgba(255, 204, 51, 0.3); }
         
-        /* ONLY DINO BOUNCES */
         .dino-bounce { 
             display: inline-block;
-            filter: drop-shadow(0 0 12px var(--gold)); 
+            filter: drop-shadow(0 0 15px var(--gold)); 
             animation: boing 0.8s infinite alternate ease-in-out; 
         }
         @keyframes boing { from { transform: translateY(0); } to { transform: translateY(-10px); } }
 
-        /* HEART GLOWS ONLY */
         .heart-glow { filter: drop-shadow(0 0 8px #ff4d4d); display: inline-block; margin-left: 5px; }
 
-        .subheader { font-family: 'Montserrat', sans-serif; font-size: 0.85rem; color: var(--champagne); opacity: 0.95; margin-top: 5px; }
+        /* BIGGER SUBHEADER FIX */
+        .subheader { font-family: 'Montserrat', sans-serif; font-size: 1rem; color: var(--champagne); opacity: 1; margin-top: 8px; font-weight: 400; }
 
-        /* CAKE & INTENSE MAGICAL GLOW */
+        /* CAKE GOW */
         .cake-container { height: 90px; width: 120px; margin: 35px auto; position: relative; }
         .cake-container::before {
             content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: 180px; height: 180px; 
-            background: radial-gradient(circle, rgba(255, 204, 51, 0.25) 0%, transparent 75%);
+            width: 190px; height: 190px; 
+            background: radial-gradient(circle, rgba(255, 204, 51, 0.3) 0%, transparent 70%);
             z-index: -1; animation: pulseGlow 2s infinite ease-in-out;
         }
-        @keyframes pulseGlow { 0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); } 50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); } }
+        @keyframes pulseGlow { 0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); } 50% { opacity: 1; transform: translate(-50%, -50%) scale(1.15); } }
 
-        .layer { position: absolute; left: 10px; width: 100px; height: 20px; border-radius: 4px; opacity: 0; transform: translateY(15px); transition: 0.8s ease; border: 1px solid rgba(255,255,255,0.05); }
+        .layer { position: absolute; left: 10px; width: 100px; height: 20px; border-radius: 4px; opacity: 0; transform: translateY(15px); transition: 0.8s ease; }
         .bottom { background: #1a2a3a; bottom: 0; } .mid { background: #243b55; bottom: 20px; } .top { background: #2c5364; bottom: 40px; }
-        .icing { background: var(--gold); height: 6px; width: 100px; bottom: 60px; border-radius: 10px; position: absolute; left: 10px; opacity: 0; transition: 0.8s; box-shadow: 0 0 10px var(--gold); }
+        .icing { background: var(--gold); height: 6px; width: 100px; bottom: 60px; border-radius: 10px; position: absolute; left: 10px; opacity: 0; transition: 0.8s; box-shadow: 0 0 12px var(--gold); }
         .visible { opacity: 1 !important; transform: translateY(0) !important; }
 
+        /* ENHANCED FLAMES */
         .candles-group { position: absolute; bottom: 65px; left: 50%; transform: translateX(-50%); width: 85px; display: flex; justify-content: space-around; opacity: 0; transition: 1s; }
-        .candle { width: 5px; height: 18px; background: #fff; border-radius: 2px; }
-        .flame { position: absolute; top: -10px; left: -2px; width: 9px; height: 12px; background: #ffaa00; border-radius: 50%; box-shadow: 0 0 15px #ffcc00; animation: flicker 0.1s infinite; }
-        @keyframes flicker { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.2); opacity: 0.8; } }
+        .candle { width: 5px; height: 18px; background: #fff; border-radius: 2px; position: relative; }
+        .flame { 
+            position: absolute; top: -12px; left: -2px; width: 10px; height: 14px; 
+            background: radial-gradient(circle, #fff 20%, #ffaa00 60%, #ff4500 100%); 
+            border-radius: 50% 50% 35% 35%; 
+            box-shadow: 0 0 18px #ffcc00, 0 0 30px rgba(255, 165, 0, 0.6); 
+            animation: flicker 0.1s infinite alternate; 
+        }
+        @keyframes flicker { 0% { transform: scale(1) rotate(-1deg); } 100% { transform: scale(1.1) rotate(1deg); } }
 
         #wish-box { font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.9rem; color: var(--gold); margin: 20px 0; opacity: 0; }
         .fade-heartbeat { animation: heartbeatFade 3s infinite ease-in-out; }
@@ -92,7 +98,7 @@
                 <h1>Happy Birthday Joydeep</h1>
                 <span class="heart-glow" style="font-size:1.3rem;">❤️</span>
             </div>
-            <div class="subheader">I love you Litt dino <span class="dino-bounce" style="font-size:1.2rem;">🦖</span></div>
+            <div class="subheader">I love you Litt dino <span class="dino-bounce" style="font-size:1.3rem;">🦖</span></div>
         </div>
         
         <div class="cake-container">
@@ -138,8 +144,7 @@
         const box = document.getElementById('content');
         if (box.style.display === 'block') {
             const rect = box.getBoundingClientRect();
-            if (e.clientX >= rect.left && e.clientX <= rect.right && 
-                e.clientY >= rect.top && e.clientY <= rect.bottom) {
+            if (e.clientX >= rect.left && e.clientX <= rect.right && e.clientY >= rect.top && e.clientY <= rect.bottom) {
                 const s = document.createElement('div');
                 s.className = 'sparkle'; s.innerHTML = '✨';
                 s.style.left = (e.clientX - rect.left) + 'px';
@@ -151,7 +156,11 @@
     }
 
     function startSurprise() {
-        document.getElementById('music').play().catch(() => {});
+        // INSTANT MUSIC TRIGGER
+        const audio = document.getElementById('music');
+        audio.currentTime = 0; 
+        audio.play().catch(e => console.log("Audio play blocked", e));
+
         document.getElementById('start-screen').style.display = 'none';
         document.getElementById('content').style.display = 'block';
         
@@ -181,12 +190,10 @@
         setTimeout(() => {
             term.style.display = 'none';
             document.getElementById('gift').style.display = 'block';
-            
             setTimeout(() => document.getElementById('l1').classList.add('visible'), 600);
             setTimeout(() => document.getElementById('l2').classList.add('visible'), 1400);
             setTimeout(() => document.getElementById('l3').classList.add('visible'), 2200);
             setTimeout(() => document.getElementById('ic').classList.add('visible'), 3000);
-            
             setTimeout(() => {
                 document.getElementById('c-group').style.opacity = '1';
                 let wish = document.getElementById('wish-box');
@@ -203,9 +210,7 @@
         document.getElementById('f2').style.display = 'none';
         document.getElementById('f3').style.display = 'none';
         document.getElementById('c-group').style.opacity = '0.3';
-        let wish = document.getElementById('wish-box');
-        wish.classList.remove('fade-heartbeat');
-        wish.innerText = "Wish sent to the stars for you... ✨";
+        document.getElementById('wish-box').innerText = "Wish sent to the stars for you... ✨";
     }
 
     function typeMsg() {
