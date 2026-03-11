@@ -1,36 +1,82 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Birthday Surprise for Joydeep</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Joydeep</title>
     <style>
-        :root { --gold: #d4af37; --champagne: #f7e7ce; }
-        body { margin: 0; padding: 0; height: 100vh; width: 100vw; background: #0d1117; color: var(--champagne); font-family: 'Montserrat', sans-serif; overflow: hidden; display: flex; justify-content: center; align-items: center; text-align: center; }
-        
-        /* Floating Hearts/Stars */
-        .heart-tap { position: fixed; pointer-events: none; color: var(--gold); font-size: 20px; animation: floatUp 2s ease-out forwards; z-index: 1000; }
-        @keyframes floatUp { 0% { transform: translateY(0) scale(1); opacity: 1; } 100% { transform: translateY(-100px) scale(1.5); opacity: 0; } }
+        body { margin: 0; background: #0d1117; color: #f7e7ce; font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; text-align: center; overflow: hidden; }
+        #start-screen { position: fixed; width: 100%; height: 100%; background: #0d1117; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 10; }
+        .btn { background: #d4af37; color: #0d1117; padding: 15px 30px; border-radius: 25px; border: none; font-weight: bold; font-size: 1.2rem; cursor: pointer; }
+        #content { display: none; width: 90%; max-width: 400px; }
+        .line { font-family: monospace; color: #d4af37; margin: 10px 0; text-align: left; }
+        h1 { color: #d4af37; font-size: 1.5rem; margin-top: 20px; }
+        #message { line-height: 1.6; font-style: italic; margin-top: 20px; font-size: 0.95rem; }
+    </style>
+</head>
+<body>
 
-        #start-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at center, #1c2531 0%, #0d1117 100%); z-index: 999; display: flex; flex-direction: column; justify-content: center; align-items: center; cursor: pointer; }
-        #scene { display: none; width: 90%; max-width: 450px; z-index: 10; padding: 30px 20px; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(15px); border-radius: 20px; border: 1px solid rgba(212, 175, 55, 0.2); box-sizing: border-box; }
-        
-        #boot-sequence { font-family: monospace; color: var(--gold); font-size: 14px; line-height: 2; text-align: left; }
-        h1 { font-family: 'Playfair Display', serif; font-size: 26px; color: var(--gold); margin: 0 0 10px 0; display: none; }
-        .subtitle { font-weight: 300; font-size: 14px; margin-bottom: 20px; display: none; }
-        
-        .dino-bounce { display: inline-block; animation: stomp 1.5s infinite; font-size: 24px; transition: all 0.5s; }
-        .litt-mode { filter: drop-shadow(0 0 10px var(--gold)); animation: stomp 1.5s infinite, glow 1s infinite alternate !important; }
-        @keyframes glow { from { transform: scale(1); } to { transform: scale(1.3); } }
-        @keyframes stomp { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+<div id="start-screen">
+    <button class="btn" onclick="start()">TAP TO ENTER ❤️</button>
+</div>
 
-        .cake { position: relative; width: 160px; height: 140px; margin: 0 auto; display: none; }
-        .layer { position: absolute; width: 100%; height: 30px; border-radius: 5px; opacity: 0; transform: translateY(10px); transition: 0.8s; left:0; }
-        .bottom { background: #1a2a3a; bottom: 0; }
-        .middle { background: #243b55; bottom: 30px; }
-        .top { background: #2c5364; bottom: 60px; }
-        .icing { position: absolute; width: 100%; height: 8px; background: var(--gold); bottom: 90px; border-radius: 10px; opacity: 0; transition: 0.8s; left:0; }
-        .show-layer { opacity: 1 !important; transform: translateY(0) !important; }
-        .candle { position: absolute; width: 4px; height: 20px; background: white;
-                 
+<div id="content">
+    <div id="console"></div>
+    <div id="final-gift" style="display:none;">
+        <h1>Happy Birthday Joydeep! 🦖</h1>
+        <div id="message"></div>
+    </div>
+</div>
+
+<script>
+    function start() {
+        document.getElementById('start-screen').style.display = 'none';
+        document.getElementById('content').style.display = 'block';
+        runConsole();
+    }
+
+    function runConsole() {
+        const lines = [
+            "> Initializing...",
+            "> Scanning for Joydeep...",
+            "> 100% Match Found 🦖",
+            "> Loading Sahib Ji Protocol..."
+        ];
+        const container = document.getElementById('console');
+        let i = 0;
+        function showLine() {
+            if (i < lines.length) {
+                let d = document.createElement('div');
+                d.className = "line";
+                d.innerHTML = lines[i];
+                container.appendChild(d);
+                i++;
+                setTimeout(showLine, 1000);
+            } else {
+                setTimeout(() => {
+                    container.style.display = 'none';
+                    showFinal();
+                }, 1000);
+            }
+        }
+        showLine();
+    }
+
+    function showFinal() {
+        document.getElementById('final-gift').style.display = 'block';
+        const text = "For me you're the best thing I can ever ask God for. Even tho merese zyada nakhre karte ho but mujhe tumhare nakhre uthna bhi pasand hai. Tumse gussa karna bhi and mere stupid se jokes pe tumhari cute si smile dekhna bhi… and that hot wink. I love you my sahib ji ❤️";
+        let j = 0;
+        const msg = document.getElementById('message');
+        function type() {
+            if (j < text.length) {
+                msg.innerHTML += text.charAt(j);
+                j++;
+                setTimeout(type, 40);
+            }
+        }
+        type();
+    }
+</script>
+
+</body>
+</html>
