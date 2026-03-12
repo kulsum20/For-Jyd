@@ -18,18 +18,19 @@
         #content { 
             display: none; width: 85%; max-width: 380px; z-index: 10; padding: 30px 20px; 
             border-radius: 35px; 
-            background: rgba(30, 35, 45, 0.98);
-            backdrop-filter: blur(10px); 
-            border: 1px solid rgba(255, 215, 0, 0.15); 
+            /* TRANSLUCENT GLASS EFFECT BELOW */
+            background: rgba(20, 25, 35, 0.75); 
+            backdrop-filter: blur(12px); 
+            -webkit-backdrop-filter: blur(12px); /* Safari support */
+            border: 1px solid rgba(255, 215, 0, 0.2); 
             position: relative;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.8), inset 0 0 20px var(--glow-soft);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6), inset 0 0 20px var(--glow-soft);
         }
 
         .line { color: var(--gold); font-family: monospace; font-size: 0.8rem; text-align: left; margin: 8px 0; padding-left: 10px; border-left: 1px solid var(--gold); min-height: 1.2em; }
 
         h1 { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.5rem; color: var(--gold); margin: 0; }
         
-        /* The emoji glow effect! */
         .emoji-glow {
             text-shadow: 0 0 10px rgba(255, 215, 0, 0.7), 0 0 15px rgba(255, 215, 0, 0.4);
             display: inline-block;
@@ -172,7 +173,6 @@
     }
 
     function startMessage() {
-        // Also added the glow to the final message heart!
         const txt = "For me you're the best thing I can ever ask God for. Even tho merese zyada nakhre karte ho but mujhe tumhare nakhre uthna bhi pasand hai. Tumse gussa karna bhi and mere stupid se jokes pe tumhari cute si smile dekhna bhi… and that hot wink.<br><br><b>I love you my sahib ji <span class='emoji-glow'>❤️</span></b>";
         let i = 0;
         const target = document.getElementById('message');
@@ -191,3 +191,4 @@
 </script>
 </body>
 </html>
+
