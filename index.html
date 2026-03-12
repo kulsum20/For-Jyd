@@ -15,26 +15,23 @@
         .unwrap-text { font-family: 'Playfair Display', serif; font-style: italic; letter-spacing: 2px; margin-bottom: 20px; color: var(--gold); }
         .btn { background: var(--gold); border: none; padding: 18px 40px; border-radius: 50px; font-weight: bold; cursor: pointer; color: #0d1117; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; z-index: 10000; box-shadow: 0 4px 15px rgba(255, 215, 0, 0.2); }
 
+        /* FIXED TRANSLUCENCY HERE */
         #content { 
             display: none; width: 85%; max-width: 380px; z-index: 10; padding: 30px 20px; 
             border-radius: 35px; 
-            /* TRANSLUCENT GLASS EFFECT BELOW */
-            background: rgba(20, 25, 35, 0.75); 
-            backdrop-filter: blur(12px); 
-            -webkit-backdrop-filter: blur(12px); /* Safari support */
+            background: rgba(15, 20, 30, 0.6) !important; /* Lowered opacity to see stars */
+            backdrop-filter: blur(15px); 
+            -webkit-backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 215, 0, 0.2); 
             position: relative;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.6), inset 0 0 20px var(--glow-soft);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
         }
 
         .line { color: var(--gold); font-family: monospace; font-size: 0.8rem; text-align: left; margin: 8px 0; padding-left: 10px; border-left: 1px solid var(--gold); min-height: 1.2em; }
 
         h1 { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.5rem; color: var(--gold); margin: 0; }
         
-        .emoji-glow {
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.7), 0 0 15px rgba(255, 215, 0, 0.4);
-            display: inline-block;
-        }
+        .emoji-glow { text-shadow: 0 0 10px rgba(255, 215, 0, 0.8); display: inline-block; }
 
         .dino-bounce { display: inline-block; animation: boing 0.8s infinite alternate ease-in-out; }
         @keyframes boing { from { transform: translateY(0); } to { transform: translateY(-10px); } }
@@ -51,9 +48,12 @@
         .flame { position: absolute; top: -12px; left: -2px; width: 9px; height: 13px; background: #ffa500; border-radius: 50%; box-shadow: 0 0 8px #ffcc33; animation: flicker 0.1s infinite; }
         @keyframes flicker { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
 
-        .fade-in-text { opacity: 0; transition: opacity 1.5s ease-in-out; }
+        /* FIXED FADE SYSTEM */
+        .fade-in-text { opacity: 0; transition: opacity 2s ease-in-out; visibility: hidden; }
+        .fade-in-text.show { opacity: 1; visibility: visible; }
+
         #wish-box { font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.85rem; color: var(--gold); margin: 20px 0; }
-        #message { font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.95rem; line-height: 1.7; text-align: center; min-height: 50px; }
+        #message { font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.95rem; line-height: 1.7; text-align: center; min-height: 50px; margin-top: 15px; }
         .footer { font-size: 0.65rem; color: var(--gold); letter-spacing: 2px; margin-top: 30px; font-weight: bold; }
 
         .sparkle { position: absolute; pointer-events: none; font-size: 20px; z-index: 1000; animation: sparkleOut 0.8s forwards; }
@@ -101,14 +101,14 @@
     function initStars() {
         canvas.width = window.innerWidth; canvas.height = window.innerHeight;
         stars = [];
-        for(let i=0; i<40; i++) stars.push({x: Math.random()*canvas.width, y: Math.random()*canvas.height, s: Math.random()*1.2});
+        for(let i=0; i<60; i++) stars.push({x: Math.random()*canvas.width, y: Math.random()*canvas.height, s: Math.random()*1.5});
     }
     function drawStars() {
         ctx.clearRect(0,0,canvas.width,canvas.height);
-        ctx.fillStyle = "rgba(255, 215, 0, 0.3)";
+        ctx.fillStyle = "rgba(255, 215, 0, 0.4)";
         stars.forEach(p => {
             ctx.beginPath(); ctx.arc(p.x, p.y, p.s, 0, Math.PI*2); ctx.fill();
-            p.y -= 0.15; if(p.y < 0) p.y = canvas.height;
+            p.y -= 0.2; if(p.y < 0) p.y = canvas.height;
         });
         requestAnimationFrame(drawStars);
     }
@@ -141,7 +141,7 @@
         document.getElementById('content').style.display = 'block';
         
         const audio = document.getElementById('music');
-        audio.play().catch(err => console.log("Audio waiting for interaction"));
+        audio.play().catch(err => console.log("Audio play blocked"));
 
         const term = document.getElementById('terminal');
         await typeLine("> SYST_CHECK: OPTIMAL...", term);
@@ -162,7 +162,7 @@
         setTimeout(() => document.getElementById('l3').classList.add('visible'), 1600);
         setTimeout(() => document.getElementById('ic').classList.add('visible'), 2200);
         setTimeout(() => {
-            document.getElementById('wish-box').style.opacity = '1';
+            document.getElementById('wish-box').classList.add('show');
             startMessage();
         }, 3000);
     }
@@ -183,7 +183,7 @@
                 target.innerHTML = txt.substring(0, i);
                 setTimeout(type, 50);
             } else {
-                document.getElementById('footer-note').style.opacity = '1';
+                document.getElementById('footer-note').classList.add('show');
             }
         }
         type();
@@ -191,4 +191,3 @@
 </script>
 </body>
 </html>
-
