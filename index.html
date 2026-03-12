@@ -6,59 +6,62 @@
     <title>For Joydeep 🦖❤️</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,600&family=Montserrat:wght@300;600&display=swap" rel="stylesheet">
     <style>
-        :root { --gold: #ffd700; --champagne: #f7e7ce; --glow-inner: rgba(255, 215, 0, 0.3); }
+        :root { --gold: #ffd700; --champagne: #f7e7ce; --glow-soft: rgba(255, 215, 0, 0.15); }
         body { margin: 0; background: #05070a; color: var(--champagne); font-family: 'Montserrat', sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; text-align: center; overflow: hidden; touch-action: manipulation; }
         
         canvas { position: fixed; top: 0; left: 0; z-index: 1; pointer-events: none; }
         
         #start-screen { position: fixed; inset: 0; background: #05070a; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; }
         .unwrap-text { font-family: 'Playfair Display', serif; font-style: italic; letter-spacing: 2px; margin-bottom: 20px; color: var(--gold); }
-        .btn { background: var(--gold); border: none; padding: 15px 35px; border-radius: 50px; font-weight: bold; cursor: pointer; color: #0d1117; font-size: 0.9rem; box-shadow: 0 0 20px rgba(255, 215, 0, 0.5); text-transform: uppercase; letter-spacing: 1px; }
+        .btn { background: var(--gold); border: none; padding: 15px 35px; border-radius: 50px; font-weight: bold; cursor: pointer; color: #0d1117; font-size: 0.9rem; box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3); text-transform: uppercase; letter-spacing: 1px; }
 
+        /* LOW GLOW CONTENT BOX */
         #content { 
             display: none; width: 85%; max-width: 380px; z-index: 10; padding: 30px 20px; 
             border-radius: 35px; 
-            background: linear-gradient(145deg, rgba(50, 55, 65, 0.97), rgba(10, 12, 18, 1));
-            backdrop-filter: blur(20px); 
-            border: 2px solid rgba(255, 215, 0, 0.5); 
+            background: linear-gradient(145deg, rgba(40, 45, 55, 0.98), rgba(10, 12, 18, 1));
+            backdrop-filter: blur(15px); 
+            border: 1px solid rgba(255, 215, 0, 0.25); 
             position: relative;
-            box-shadow: 0 25px 70px rgba(0,0,0,1), inset 0 0 45px var(--glow-inner);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8), inset 0 0 30px var(--glow-soft);
         }
 
-        .line { color: var(--gold); font-family: monospace; font-size: 0.8rem; text-align: left; margin: 8px 0; padding-left: 10px; border-left: 2px solid var(--gold); min-height: 1.2em; }
+        .line { color: var(--gold); font-family: monospace; font-size: 0.8rem; text-align: left; margin: 8px 0; padding-left: 10px; border-left: 1px solid var(--gold); min-height: 1.2em; }
 
-        h1 { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.5rem; color: var(--gold); margin: 0; text-shadow: 0 0 15px rgba(255, 215, 0, 0.4); }
-        .heart-glow { filter: drop-shadow(0 0 10px rgba(255, 77, 77, 0.8)); display: inline-block; }
-        .dino-bounce { display: inline-block; animation: boing 0.8s infinite alternate ease-in-out; filter: drop-shadow(0 0 8px var(--gold)); }
+        h1 { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.5rem; color: var(--gold); margin: 0; text-shadow: 0 0 10px rgba(255, 215, 0, 0.3); }
+        .heart-glow { filter: drop-shadow(0 0 8px rgba(255, 77, 77, 0.6)); display: inline-block; }
+        .dino-bounce { display: inline-block; animation: boing 0.8s infinite alternate ease-in-out; }
         @keyframes boing { from { transform: translateY(0); } to { transform: translateY(-10px); } }
 
-        /* PERFECT CAKE & CANDLE ALIGNMENT */
         .cake-container { height: 110px; width: 120px; margin: 35px auto; position: relative; }
         .layer { position: absolute; left: 10px; width: 100px; height: 25px; border-radius: 6px; opacity: 0; transform: translateY(10px); transition: 0.6s ease; }
         .bottom { background: #1a2a3a; bottom: 0; } 
         .mid { background: #243b55; bottom: 25px; } 
-        .top { background: #2c5364; bottom: 50px; z-index: 5; position: absolute; }
-        .icing { background: var(--gold); height: 8px; width: 110px; bottom: 75px; border-radius: 10px; position: absolute; left: 5px; opacity: 0; transition: 0.6s; box-shadow: 0 0 15px var(--gold); z-index: 6; }
+        .top { background: #2c5364; bottom: 50px; z-index: 5; }
+        .icing { background: var(--gold); height: 8px; width: 108px; bottom: 75px; border-radius: 10px; position: absolute; left: 6px; opacity: 0; transition: 0.6s; box-shadow: 0 0 10px var(--gold); z-index: 6; }
         .visible { opacity: 1 !important; transform: translateY(0) !important; }
 
         .candle { width: 5px; height: 20px; background: #fff; border-radius: 2px; position: absolute; top: -20px; display: flex; justify-content: center; }
         .flame { 
-            position: absolute; top: -12px; width: 9px; height: 13px; background: #ffa500; border-radius: 50%; 
-            box-shadow: 0 0 10px #ffcc33; animation: flicker 0.1s infinite; 
+            position: absolute; top: -12px; width: 8px; height: 12px; background: #ffa500; border-radius: 50%; 
+            box-shadow: 0 0 8px #ffcc33; animation: flicker 0.1s infinite; 
         }
         @keyframes flicker { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
 
-        #wish-box { font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.85rem; color: var(--gold); margin: 20px 0; opacity: 0; cursor: pointer; transition: opacity 0.5s; }
-        
-        /* FADE EFFECT FOR MESSAGE */
+        #wish-box { font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.85rem; color: var(--gold); margin: 20px 0; opacity: 0; cursor: pointer; }
         #message { font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.95rem; line-height: 1.7; opacity: 0; text-align: center; }
-        .fade-in { animation: textFade 2s forwards; }
-        @keyframes textFade { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* FOOTER FADE EFFECT */
+        .footer { font-size: 0.65rem; color: var(--gold); letter-spacing: 2px; opacity: 0; margin-top: 30px; font-weight: bold; }
+        .fade-ready { animation: footerFade 2.5s forwards; }
+        @keyframes footerFade { from { opacity: 0; } to { opacity: 0.7; } }
 
-        .footer { font-size: 0.65rem; color: var(--gold); letter-spacing: 2px; opacity: 0; transition: 2s; margin-top: 30px; font-weight: bold; }
+        /* SPARKLE EFFECT */
+        .sparkle { position: absolute; pointer-events: none; font-size: 18px; z-index: 100; animation: sparkleOut 0.8s forwards; }
+        @keyframes sparkleOut { 0% { transform: scale(0); opacity: 1; } 100% { transform: scale(1.5); opacity: 0; } }
     </style>
 </head>
-<body>
+<body onclick="handleTap(event)">
 
 <canvas id="starField"></canvas>
 
@@ -77,9 +80,9 @@
             <div id="l1" class="layer bottom"></div>
             <div id="l2" class="layer mid"></div>
             <div id="l3" class="layer top">
-                <div class="candle" style="left: 12px;"><div class="flame" id="f1"></div></div>
-                <div class="candle" style="left: 48px; top: -25px;"><div class="flame" id="f2"></div></div>
-                <div class="candle" style="left: 83px;"><div class="flame" id="f3"></div></div>
+                <div class="candle" style="left: 12px;"><div class="flame"></div></div>
+                <div class="candle" style="left: 48px; top: -25px;"><div class="flame"></div></div>
+                <div class="candle" style="left: 83px;"><div class="flame"></div></div>
             </div>
             <div id="ic" class="icing"></div>
         </div>
@@ -98,79 +101,21 @@
     let stars = [];
     function setupStars() {
         canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-        for(let i=0; i<50; i++) stars.push({x: Math.random()*canvas.width, y: Math.random()*canvas.height, s: Math.random()*1.5});
+        for(let i=0; i<50; i++) stars.push({x: Math.random()*canvas.width, y: Math.random()*canvas.height, s: Math.random()*1.2});
     }
     function drawStars() {
         ctx.clearRect(0,0,canvas.width,canvas.height);
-        ctx.fillStyle = "rgba(255, 215, 0, 0.4)";
+        ctx.fillStyle = "rgba(255, 215, 0, 0.3)";
         stars.forEach(p => {
             ctx.beginPath(); ctx.arc(p.x, p.y, p.s, 0, Math.PI*2); ctx.fill();
-            p.y -= 0.2; if(p.y < 0) p.y = canvas.height;
+            p.y -= 0.15; if(p.y < 0) p.y = canvas.height;
         });
         requestAnimationFrame(drawStars);
     }
     setupStars(); drawStars();
 
-    async function typeLine(text, container, playMusicNow = false) {
-        const div = document.createElement('div');
-        div.className = "line";
-        container.appendChild(div);
-        for (let i = 0; i < text.length; i++) {
-            div.innerHTML += text[i];
-            await new Promise(r => setTimeout(r, 40));
-        }
-        if (playMusicNow) document.getElementById('music').play().catch(() => {});
-        await new Promise(r => setTimeout(r, 400));
-    }
-
-    async function startSurprise() {
-        document.getElementById('start-screen').style.display = 'none';
-        document.getElementById('content').style.display = 'block';
-        const term = document.getElementById('terminal');
-        
-        await typeLine("> SYST_CHECK: OPTIMAL...", term, true);
-        await typeLine("> BYPASSING SECURITY...", term);
-        await typeLine("> LOADING DATA...", term);
-        await typeLine("> SCANNING FOR LITT DINO...", term);
-        await typeLine("> MATCH FOUND: JOYDEEP ❤️", term);
-        await typeLine("> INIT SAHIB JI PROTOCOL...", term);
-        
-        setTimeout(triggerGift, 800);
-    }
-
-    function triggerGift() {
-        document.getElementById('terminal').style.display = 'none';
-        document.getElementById('gift').style.display = 'block';
-        setTimeout(() => document.getElementById('l1').classList.add('visible'), 400);
-        setTimeout(() => document.getElementById('l2').classList.add('visible'), 1000);
-        setTimeout(() => document.getElementById('l3').classList.add('visible'), 1600);
-        setTimeout(() => document.getElementById('ic').classList.add('visible'), 2200);
-        setTimeout(() => {
-            document.getElementById('wish-box').style.opacity = '1';
-            typeMsg();
-        }, 3000);
-    }
-
-    function blowOut() {
-        document.querySelectorAll('.flame').forEach(f => f.style.display = 'none');
-        document.getElementById('wish-box').innerText = "Wish sent to the stars... ✨";
-    }
-
-    function typeMsg() {
-        const txt = "For me you're the best thing I can ever ask God for. Even tho merese zyada nakhre karte ho but mujhe tumhare nakhre uthna bhi pasand hai. Tumse gussa karna bhi and mere stupid se jokes pe tumhari cute si smile dekhna bhi… and that hot wink.<br><br><b>I love you my sahib ji ❤️</b>";
-        let i = 0; const target = document.getElementById('message');
-        target.classList.add('fade-in'); // Applies the fade effect
-        function type() {
-            if(i < txt.length) {
-                if(txt.charAt(i) === '<') { i = txt.indexOf('>', i) + 1; } 
-                else { i++; }
-                target.innerHTML = txt.substring(0, i);
-                setTimeout(type, 45);
-            } else { document.getElementById('footer-note').style.opacity = '1'; }
-        }
-        type();
-    }
-</script>
-</body>
-</html>
-
+    // FIX: TAP SPARKLE EFFECT
+    function handleTap(e) {
+        const content = document.getElementById('content');
+        if (content.style.display ===
+            
