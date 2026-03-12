@@ -28,6 +28,13 @@
         .line { color: var(--gold); font-family: monospace; font-size: 0.8rem; text-align: left; margin: 8px 0; padding-left: 10px; border-left: 1px solid var(--gold); min-height: 1.2em; }
 
         h1 { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.5rem; color: var(--gold); margin: 0; }
+        
+        /* The emoji glow effect! */
+        .emoji-glow {
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.7), 0 0 15px rgba(255, 215, 0, 0.4);
+            display: inline-block;
+        }
+
         .dino-bounce { display: inline-block; animation: boing 0.8s infinite alternate ease-in-out; }
         @keyframes boing { from { transform: translateY(0); } to { transform: translateY(-10px); } }
 
@@ -64,8 +71,8 @@
 <div id="content">
     <div id="terminal"></div>
     <div id="gift" style="display:none;">
-        <h1>Happy Birthday Joydeep ❤️</h1>
-        <div style="margin-top:10px;">I love you Litt dino <span class="dino-bounce">🦖</span></div>
+        <h1>Happy Birthday Joydeep <span class="emoji-glow">❤️</span></h1>
+        <div style="margin-top:10px;">I love you Litt dino <span class="dino-bounce"><span class="emoji-glow">🦖</span></span></div>
         
         <div class="cake-container" onclick="blowOut()">
             <div id="l1" class="layer bottom"></div>
@@ -80,7 +87,7 @@
 
         <div id="wish-box" class="fade-in-text">Close your eyes & wish upon a star... ✨</div>
         <div id="message"></div>
-        <div id="footer-note" class="footer fade-in-text">MADE WITH LOVE FOR JOYDEEP ❤️</div>
+        <div id="footer-note" class="footer fade-in-text">MADE WITH LOVE FOR JOYDEEP <span class="emoji-glow">❤️</span></div>
     </div>
 </div>
 
@@ -165,7 +172,8 @@
     }
 
     function startMessage() {
-        const txt = "For me you're the best thing I can ever ask God for. Even tho merese zyada nakhre karte ho but mujhe tumhare nakhre uthna bhi pasand hai. Tumse gussa karna bhi and mere stupid se jokes pe tumhari cute si smile dekhna bhi… and that hot wink.<br><br><b>I love you my sahib ji ❤️</b>";
+        // Also added the glow to the final message heart!
+        const txt = "For me you're the best thing I can ever ask God for. Even tho merese zyada nakhre karte ho but mujhe tumhare nakhre uthna bhi pasand hai. Tumse gussa karna bhi and mere stupid se jokes pe tumhari cute si smile dekhna bhi… and that hot wink.<br><br><b>I love you my sahib ji <span class='emoji-glow'>❤️</span></b>";
         let i = 0;
         const target = document.getElementById('message');
         function type() {
