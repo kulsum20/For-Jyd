@@ -31,7 +31,7 @@
         .dino-bounce { display: inline-block; animation: boing 0.8s infinite alternate ease-in-out; }
         @keyframes boing { from { transform: translateY(0); } to { transform: translateY(-10px); } }
 
-        .cake-container { height: 110px; width: 120px; margin: 30px auto; position: relative; }
+        .cake-container { height: 110px; width: 120px; margin: 30px auto; position: relative; cursor: pointer; }
         .layer { position: absolute; left: 10px; width: 100px; height: 25px; border-radius: 6px; opacity: 0; transform: translateY(10px); transition: 0.6s ease; }
         .bottom { background: #1a2a3a; bottom: 0; } 
         .mid { background: #243b55; bottom: 25px; } 
@@ -44,7 +44,7 @@
         @keyframes flicker { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
 
         .fade-in-text { opacity: 0; transition: opacity 1.5s ease-in-out; }
-        #wish-box { font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.85rem; color: var(--gold); margin: 20px 0; cursor: pointer; }
+        #wish-box { font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.85rem; color: var(--gold); margin: 20px 0; }
         #message { font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.95rem; line-height: 1.7; text-align: center; min-height: 50px; }
         .footer { font-size: 0.65rem; color: var(--gold); letter-spacing: 2px; margin-top: 30px; font-weight: bold; }
 
@@ -67,7 +67,7 @@
         <h1>Happy Birthday Joydeep ❤️</h1>
         <div style="margin-top:10px;">I love you Litt dino <span class="dino-bounce">🦖</span></div>
         
-        <div class="cake-container">
+        <div class="cake-container" onclick="blowOut()">
             <div id="l1" class="layer bottom"></div>
             <div id="l2" class="layer mid"></div>
             <div id="l3" class="layer top">
@@ -78,7 +78,7 @@
             <div id="ic" class="icing"></div>
         </div>
 
-        <div id="wish-box" class="fade-in-text" onclick="blowOut()">Close your eyes & wish upon a star... ✨</div>
+        <div id="wish-box" class="fade-in-text">Close your eyes & wish upon a star... ✨</div>
         <div id="message"></div>
         <div id="footer-note" class="footer fade-in-text">MADE WITH LOVE FOR JOYDEEP ❤️</div>
     </div>
