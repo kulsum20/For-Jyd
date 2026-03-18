@@ -43,7 +43,6 @@
         .icing { background: var(--gold); height: 8px; width: 108px; bottom: 75px; border-radius: 10px; position: absolute; left: 6px; opacity: 0; transition: 0.6s; box-shadow: 0 0 10px var(--gold); z-index: 6; }
         .visible { opacity: 1 !important; transform: translateY(0) !important; }
 
-        /* Candle tap area enlarged for easier mobile touching */
         .candle { width: 12px; height: 30px; position: absolute; top: -30px; cursor: pointer; z-index: 20; display: flex; justify-content: center; }
         .candle-stick { width: 5px; height: 20px; background: #fff; border-radius: 2px; position: absolute; bottom: 0; }
         .flame { position: absolute; top: -10px; width: 9px; height: 13px; background: #ffa500; border-radius: 50%; box-shadow: 0 0 8px #ffcc33; animation: flicker 0.1s infinite; pointer-events: none; }
@@ -158,6 +157,18 @@
         await typeLine("> MATCH FOUND: JOYDEEP ❤️", term);
         await typeLine("> INIT SAHIB JI PROTOCOL...", term);
         
+        // This is the secret "Chori Pakdi Gayi" message
+        console.log("%c ❤️ CHORI PAKDI GAYI! ", "color: #ff4d4d; font-weight: bold; font-size: 22px;");
+        setTimeout(() => {
+            console.log(
+                "%cI knew you'd end up looking here, Sahib Ji. 😂\n\n" +
+                "Cake chhod kar code dekh rahe ho?\n" +
+                "I built this on my phone just for you, so don't be too hard on me if it's not perfect.\n\n" +
+                "I'm just really happy you're mine, Master Ji... 🫦😽",
+                "color: #ffd700; font-family: sans-serif; line-height: 1.6; font-size: 15px; background: #05070a; padding: 10px;"
+            );
+        }, 1200);
+
         setTimeout(showGift, 600);
     }
 
@@ -177,8 +188,6 @@
     function blowOut(el) {
         const flame = el.querySelector('.flame');
         if (flame) flame.style.display = 'none';
-        
-        // Check if all are out
         const flames = document.querySelectorAll('.flame');
         const active = Array.from(flames).filter(f => f.style.display !== 'none');
         if (active.length === 0) {
@@ -204,5 +213,4 @@
     }
 </script>
 </body>
-    </html>
-    
+</html>
